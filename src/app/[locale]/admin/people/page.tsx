@@ -1,76 +1,105 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Badge, Button, Avatar, Input, Drawer, Select } from '@sunghoon_lee/akron-ui';
+import { createClient } from '@/lib/supabase/client';
+import { createPerson, updatePerson, deletePerson, type PersonInput } from '@/lib/supabase/mutations/people';
 
 interface Person {
   id: string;
-  name: string;
-  role: 'actor' | 'staff';
-  position: string;
-  bio: string;
-  isActive: boolean;
+  name_ko: string;
+  role: string;
+  position_ko: string | null;
+  bio_ko: string | null;
+  is_active: boolean;
 }
-
-const INITIAL_PEOPLE: Person[] = [
-  { id: 'p1', name: '김민수', role: 'actor', position: '배우', bio: '서울예술대학교 연극학과 졸업', isActive: true },
-  { id: 'p2', name: '이서연', role: 'actor', position: '배우', bio: '한국예술종합학교 연극원 졸업', isActive: true },
-  { id: 'p3', name: '박준호', role: 'actor', position: '배우', bio: '중앙대학교 연극학과 졸업', isActive: true },
-  { id: 'p4', name: '최예진', role: 'actor', position: '배우', bio: '동국대학교 연극학부 졸업', isActive: true },
-  { id: 'p5', name: '정하늘', role: 'staff', position: '연출', bio: '15년 경력의 연출가', isActive: true },
-  { id: 'p6', name: '윤지원', role: 'staff', position: '무대디자인', bio: '국내외 다수 수상 경력', isActive: true },
-  { id: 'p7', name: '한승우', role: 'staff', position: '조명디자인', bio: '10년 경력의 조명 디자이너', isActive: true },
-  { id: 'p8', name: '강소희', role: 'staff', position: '기획/프로듀서', bio: '다수의 극단 공연 기획', isActive: true },
-];
 
 const roleOptions = [
   { value: 'actor', label: '배우' },
   { value: 'staff', label: '스텝' },
 ];
 
-const emptyForm = { name: '', role: 'actor' as Person['role'], position: '', bio: '' };
+const emptyForm = { name_ko: '', role: 'actor', position_ko: '', bio_ko: '' };
 
 export default function AdminPeoplePage() {
-  const [people, setPeople] = useState<Person[]>(INITIAL_PEOPLE);
+  const [people, setPeople] = useState<Person[]>([]);
+  const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
-  const [modalOpen, setModalOpen] = useState(false);
+  const [drawerOpen, setDrawerOpen] = useState(false);
   const [editingPerson, setEditingPerson] = useState<Person | null>(null);
   const [form, setForm] = useState(emptyForm);
   const [deleteTarget, setDeleteTarget] = useState<Person | null>(null);
+  const [saving, setSaving] = useState(false);
 
-  const filtered = people.filter((p) => p.name.includes(search) || p.position.includes(search));
+  const fetchPeople = useCallback(async () => {
+    const supabase = createClient();
+    const { data } = await supabase
+      .from('people')
+      .select('id, name_ko, role, position_ko, bio_ko, is_active')
+      .order('created_at', { ascending: false });
+    setPeople((data || []) as Person[]);
+    setLoading(false);
+  }, []);
+
+  useEffect(() => { fetchPeople(); }, [fetchPeople]);
+
+  const filtered = people.filter((p) =>
+    p.name_ko.includes(search) || (p.position_ko || '').includes(search)
+  );
 
   const openCreate = () => {
     setEditingPerson(null);
     setForm(emptyForm);
-    setModalOpen(true);
+    setDrawerOpen(true);
   };
 
   const openEdit = (person: Person) => {
     setEditingPerson(person);
-    setForm({ name: person.name, role: person.role, position: person.position, bio: person.bio });
-    setModalOpen(true);
+    setForm({
+      name_ko: person.name_ko,
+      role: person.role,
+      position_ko: person.position_ko || '',
+      bio_ko: person.bio_ko || '',
+    });
+    setDrawerOpen(true);
   };
 
-  const handleSave = () => {
-    if (!form.name || !form.position) return;
-    if (editingPerson) {
-      setPeople(people.map((p) => p.id === editingPerson.id ? { ...p, ...form } : p));
-    } else {
-      const newPerson: Person = {
-        id: Date.now().toString(),
-        ...form,
-        isActive: true,
+  const handleSave = async () => {
+    if (!form.name_ko || !form.position_ko) return;
+    setSaving(true);
+    try {
+      const input: PersonInput = {
+        name_ko: form.name_ko,
+        role: form.role as PersonInput['role'],
+        position_ko: form.position_ko,
+        bio_ko: form.bio_ko || undefined,
       };
-      setPeople([...people, newPerson]);
+      if (editingPerson) {
+        await updatePerson(editingPerson.id, input);
+      } else {
+        await createPerson(input);
+      }
+      setDrawerOpen(false);
+      await fetchPeople();
+    } catch (e) {
+      alert('저장 실패: ' + (e as Error).message);
+    } finally {
+      setSaving(false);
     }
-    setModalOpen(false);
   };
 
-  const handleDelete = () => {
+  const handleDelete = async () => {
     if (!deleteTarget) return;
-    setPeople(people.filter((p) => p.id !== deleteTarget.id));
-    setDeleteTarget(null);
+    setSaving(true);
+    try {
+      await deletePerson(deleteTarget.id);
+      setDeleteTarget(null);
+      await fetchPeople();
+    } catch (e) {
+      alert('삭제 실패: ' + (e as Error).message);
+    } finally {
+      setSaving(false);
+    }
   };
 
   return (
@@ -84,46 +113,52 @@ export default function AdminPeoplePage() {
         <Input placeholder="이름, 포지션 검색..." value={search} onChange={(e) => setSearch(e.target.value)} />
       </div>
 
-      <div className="grid gap-3 sm:grid-cols-2">
-        {filtered.map((p) => (
-          <div key={p.id} className="flex items-center justify-between rounded-xl border border-border p-4">
-            <div className="flex items-center gap-3">
-              <Avatar name={p.name} size="md" shape="circle" />
-              <div>
-                <p className="font-medium">{p.name}</p>
-                <p className="text-sm text-muted-foreground">{p.position}</p>
+      {loading ? (
+        <div className="py-12 text-center text-muted-foreground">로딩 중...</div>
+      ) : (
+        <div className="grid gap-3 sm:grid-cols-2">
+          {filtered.map((p) => (
+            <div key={p.id} className="flex items-center justify-between rounded-xl border border-border p-4">
+              <div className="flex items-center gap-3">
+                <Avatar name={p.name_ko} size="md" shape="circle" />
+                <div>
+                  <p className="font-medium">{p.name_ko}</p>
+                  <p className="text-sm text-muted-foreground">{p.position_ko}</p>
+                </div>
+                <Badge variant="subtle" color={p.role === 'actor' ? 'primary' : 'success'} size="sm">
+                  {p.role === 'actor' ? '배우' : '스텝'}
+                </Badge>
               </div>
-              <Badge variant="subtle" color={p.role === 'actor' ? 'primary' : 'success'} size="sm">
-                {p.role === 'actor' ? '배우' : '스텝'}
-              </Badge>
+              <div className="flex gap-2">
+                <Button variant="ghost" size="sm" onClick={() => openEdit(p)}>수정</Button>
+                <Button variant="ghost" size="sm" onClick={() => setDeleteTarget(p)}>삭제</Button>
+              </div>
             </div>
-            <div className="flex gap-2">
-              <Button variant="ghost" size="sm" onClick={() => openEdit(p)}>수정</Button>
-              <Button variant="ghost" size="sm" onClick={() => setDeleteTarget(p)}>삭제</Button>
+          ))}
+          {filtered.length === 0 && (
+            <div className="col-span-2 py-8 text-center text-muted-foreground">
+              {people.length === 0 ? '등록된 프로필이 없습니다. 프로필을 등록해주세요.' : '검색 결과가 없습니다.'}
             </div>
-          </div>
-        ))}
-        {filtered.length === 0 && (
-          <div className="col-span-2 py-8 text-center text-muted-foreground">검색 결과가 없습니다.</div>
-        )}
-      </div>
+          )}
+        </div>
+      )}
 
       <Drawer
-        open={modalOpen}
-        onOpenChange={setModalOpen}
+        open={drawerOpen}
+        onOpenChange={setDrawerOpen}
         placement="right"
         size="md"
         title={editingPerson ? '프로필 수정' : '프로필 등록'}
         footer={
           <div className="flex justify-end gap-2">
-            <Button variant="ghost" size="md" onClick={() => setModalOpen(false)}>취소</Button>
+            <Button variant="ghost" size="md" onClick={() => setDrawerOpen(false)}>취소</Button>
             <Button
               variant="primary"
               size="md"
               onClick={handleSave}
-              disabled={!form.name || !form.position}
+              disabled={!form.name_ko || !form.position_ko || saving}
             >
-              {editingPerson ? '수정' : '등록'}
+              {saving ? '저장 중...' : editingPerson ? '수정' : '등록'}
             </Button>
           </div>
         }
@@ -131,8 +166,8 @@ export default function AdminPeoplePage() {
         <div className="space-y-4">
           <Input
             label="이름"
-            value={form.name}
-            onChange={(e) => setForm({ ...form, name: e.target.value })}
+            value={form.name_ko}
+            onChange={(e) => setForm({ ...form, name_ko: e.target.value })}
             placeholder="홍길동"
             required
           />
@@ -140,19 +175,19 @@ export default function AdminPeoplePage() {
             label="구분"
             options={roleOptions}
             value={form.role}
-            onValueChange={(v) => setForm({ ...form, role: v as Person['role'] })}
+            onValueChange={(v) => setForm({ ...form, role: v })}
           />
           <Input
             label="포지션"
-            value={form.position}
-            onChange={(e) => setForm({ ...form, position: e.target.value })}
+            value={form.position_ko}
+            onChange={(e) => setForm({ ...form, position_ko: e.target.value })}
             placeholder="배우, 연출, 무대디자인 등"
             required
           />
           <Input
             label="소개"
-            value={form.bio}
-            onChange={(e) => setForm({ ...form, bio: e.target.value })}
+            value={form.bio_ko}
+            onChange={(e) => setForm({ ...form, bio_ko: e.target.value })}
             placeholder="간단한 소개를 입력하세요"
           />
         </div>
@@ -167,12 +202,14 @@ export default function AdminPeoplePage() {
         footer={
           <div className="flex justify-end gap-2">
             <Button variant="ghost" size="md" onClick={() => setDeleteTarget(null)}>취소</Button>
-            <Button variant="primary" size="md" onClick={handleDelete} className="bg-red-600 hover:bg-red-700">삭제</Button>
+            <Button variant="primary" size="md" onClick={handleDelete} disabled={saving} className="bg-red-600 hover:bg-red-700">
+              {saving ? '삭제 중...' : '삭제'}
+            </Button>
           </div>
         }
       >
         <p className="text-sm text-muted-foreground">
-          &ldquo;{deleteTarget?.name}&rdquo; 프로필을 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다.
+          &ldquo;{deleteTarget?.name_ko}&rdquo; 프로필을 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다.
         </p>
       </Drawer>
     </div>
