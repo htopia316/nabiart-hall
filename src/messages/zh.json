@@ -1,0 +1,115 @@
+{
+  "common": {
+    "siteName": "蝴蝶艺术厅",
+    "home": "首页",
+    "shows": "演出",
+    "booking": "订票",
+    "people": "团队",
+    "rental": "场地租赁",
+    "notices": "公告",
+    "support": "赞助",
+    "admin": "管理",
+    "language": "语言",
+    "theme": "主题",
+    "light": "浅色",
+    "dark": "深色",
+    "system": "系统",
+    "more": "更多",
+    "back": "返回",
+    "close": "关闭",
+    "search": "搜索",
+    "loading": "加载中...",
+    "error": "发生错误",
+    "noResults": "未找到结果"
+  },
+  "landing": {
+    "heroTitle": "舞台上的感动，\n尽在蝴蝶艺术厅",
+    "heroSubtitle": "与精彩演出共度艺术时刻",
+    "nowPlaying": "正在上演",
+    "latestNotices": "公告",
+    "supportUs": "与蝴蝶艺术厅同行",
+    "supportDescription": "您的支持成就更好的演出"
+  },
+  "shows": {
+    "current": "当前演出",
+    "upcoming": "即将上演",
+    "past": "往期演出",
+    "details": "演出详情",
+    "schedule": "演出日程",
+    "cast": "演员阵容",
+    "bookNow": "立即订票"
+  },
+  "booking": {
+    "selectDate": "选择日期",
+    "selectTime": "选择场次",
+    "selectSeat": "选择座位",
+    "payment": "支付",
+    "confirmation": "订票确认",
+    "seatGrade": {
+      "vip": "VIP席",
+      "standard": "普通席",
+      "economy": "经济席"
+    },
+    "available": "可选",
+    "reserved": "已售",
+    "selected": "已选",
+    "totalPrice": "总计",
+    "proceed": "去支付",
+    "bookingNumber": "订票编号",
+    "myBookings": "我的订票",
+    "lookup": "订票查询",
+    "lookupDesc": "输入订票编号和联系电话查询预订详情。",
+    "enterBookingNumber": "订票编号",
+    "enterPhone": "联系电话",
+    "lookupButton": "查询",
+    "cancelBooking": "取消订票",
+    "cancelConfirm": "确定要取消订票吗？取消后无法恢复。",
+    "cancelSuccess": "订票已取消。",
+    "bookingNotFound": "未找到订票记录。请确认订票编号和联系电话。",
+    "status": {
+      "confirmed": "已确认",
+      "cancelled": "已取消",
+      "pending": "待支付"
+    },
+    "showTitle": "演出名称",
+    "bookingDate": "订票日期",
+    "showDate": "演出日期",
+    "seats": "座位",
+    "bookerName": "预订者",
+    "bookerPhone": "联系电话",
+    "paymentAmount": "支付金额"
+  },
+  "people": {
+    "actors": "演员",
+    "staff": "工作人员",
+    "profile": "简介",
+    "filmography": "参演作品"
+  },
+  "rental": {
+    "title": "场地租赁",
+    "info": "设施介绍",
+    "pricing": "价格表",
+    "inquiry": "租赁咨询",
+    "calendar": "日程查询"
+  },
+  "notices": {
+    "title": "公告",
+    "pinned": "置顶"
+  },
+  "support": {
+    "title": "赞助我们",
+    "oneTime": "一次性赞助",
+    "recurring": "月度赞助",
+    "donors": "赞助者名单",
+    "benefits": "赞助权益",
+    "thankYou": "感谢您"
+  },
+  "footer": {
+    "address": "地址",
+    "phone": "电话",
+    "email": "邮箱",
+    "terms": "使用条款",
+    "privacy": "隐私政策",
+    "copyright": "© {year} 蝴蝶艺术厅. All rights reserved."
+  }
+}

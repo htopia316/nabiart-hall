@@ -1,0 +1,115 @@
+{
+  "common": {
+    "siteName": "Nabiart Hall",
+    "home": "Home",
+    "shows": "Shows",
+    "booking": "Booking",
+    "people": "People",
+    "rental": "Rental",
+    "notices": "Notices",
+    "support": "Support",
+    "admin": "Admin",
+    "language": "Language",
+    "theme": "Theme",
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System",
+    "more": "More",
+    "back": "Back",
+    "close": "Close",
+    "search": "Search",
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "noResults": "No results found"
+  },
+  "landing": {
+    "heroTitle": "Moments of Art,\nat Nabiart Hall",
+    "heroSubtitle": "Experience the magic of live performance",
+    "nowPlaying": "Now Playing",
+    "latestNotices": "Notices",
+    "supportUs": "Support Nabiart Hall",
+    "supportDescription": "Your support makes better performances possible"
+  },
+  "shows": {
+    "current": "Current Shows",
+    "upcoming": "Upcoming Shows",
+    "past": "Past Shows",
+    "details": "Show Details",
+    "schedule": "Schedule",
+    "cast": "Cast",
+    "bookNow": "Book Now"
+  },
+  "booking": {
+    "selectDate": "Select Date",
+    "selectTime": "Select Time",
+    "selectSeat": "Select Seat",
+    "payment": "Payment",
+    "confirmation": "Confirmation",
+    "seatGrade": {
+      "vip": "VIP",
+      "standard": "Standard",
+      "economy": "Economy"
+    },
+    "available": "Available",
+    "reserved": "Reserved",
+    "selected": "Selected",
+    "totalPrice": "Total",
+    "proceed": "Proceed to Payment",
+    "bookingNumber": "Booking Number",
+    "myBookings": "My Bookings",
+    "lookup": "Booking Lookup",
+    "lookupDesc": "Enter your booking number and phone number to check your reservation.",
+    "enterBookingNumber": "Booking Number",
+    "enterPhone": "Phone Number",
+    "lookupButton": "Look Up",
+    "cancelBooking": "Cancel Booking",
+    "cancelConfirm": "Are you sure you want to cancel this booking? This cannot be undone.",
+    "cancelSuccess": "Booking has been cancelled.",
+    "bookingNotFound": "Booking not found. Please check your booking number and phone number.",
+    "status": {
+      "confirmed": "Confirmed",
+      "cancelled": "Cancelled",
+      "pending": "Pending"
+    },
+    "showTitle": "Show",
+    "bookingDate": "Booking Date",
+    "showDate": "Show Date",
+    "seats": "Seats",
+    "bookerName": "Name",
+    "bookerPhone": "Phone",
+    "paymentAmount": "Amount Paid"
+  },
+  "people": {
+    "actors": "Actors",
+    "staff": "Staff",
+    "profile": "Profile",
+    "filmography": "Filmography"
+  },
+  "rental": {
+    "title": "Venue Rental",
+    "info": "Facilities",
+    "pricing": "Pricing",
+    "inquiry": "Inquiry",
+    "calendar": "Availability"
+  },
+  "notices": {
+    "title": "Notices",
+    "pinned": "Pinned"
+  },
+  "support": {
+    "title": "Support Us",
+    "oneTime": "One-time",
+    "recurring": "Monthly",
+    "donors": "Donors",
+    "benefits": "Benefits",
+    "thankYou": "Thank You"
+  },
+  "footer": {
+    "address": "Address",
+    "phone": "Phone",
+    "email": "Email",
+    "terms": "Terms of Service",
+    "privacy": "Privacy Policy",
+    "copyright": "© {year} Nabiart Hall. All rights reserved."
+  }
+}

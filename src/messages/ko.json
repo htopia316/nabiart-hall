@@ -1,0 +1,115 @@
+{
+  "common": {
+    "siteName": "나비아트홀",
+    "home": "홈",
+    "shows": "공연",
+    "booking": "예매",
+    "people": "사람들",
+    "rental": "대관",
+    "notices": "공지사항",
+    "support": "후원",
+    "admin": "관리자",
+    "language": "언어",
+    "theme": "테마",
+    "light": "라이트",
+    "dark": "다크",
+    "system": "시스템",
+    "more": "더 보기",
+    "back": "뒤로",
+    "close": "닫기",
+    "search": "검색",
+    "loading": "로딩 중...",
+    "error": "오류가 발생했습니다",
+    "noResults": "결과가 없습니다"
+  },
+  "landing": {
+    "heroTitle": "무대 위의 감동,\n나비아트홀에서",
+    "heroSubtitle": "특별한 공연과 함께하는 예술의 순간",
+    "nowPlaying": "지금 상영 중",
+    "latestNotices": "공지사항",
+    "supportUs": "나비아트홀과 함께해주세요",
+    "supportDescription": "여러분의 후원이 더 나은 공연을 만듭니다"
+  },
+  "shows": {
+    "current": "현재 공연",
+    "upcoming": "예정 공연",
+    "past": "지난 공연",
+    "details": "공연 상세",
+    "schedule": "공연 일정",
+    "cast": "출연진",
+    "bookNow": "예매하기"
+  },
+  "booking": {
+    "selectDate": "날짜 선택",
+    "selectTime": "회차 선택",
+    "selectSeat": "좌석 선택",
+    "payment": "결제",
+    "confirmation": "예매 확인",
+    "seatGrade": {
+      "vip": "VIP석",
+      "standard": "일반석",
+      "economy": "이코노미석"
+    },
+    "available": "선택 가능",
+    "reserved": "예매됨",
+    "selected": "선택됨",
+    "totalPrice": "총 결제 금액",
+    "proceed": "결제 진행",
+    "bookingNumber": "예매 번호",
+    "myBookings": "나의 예매",
+    "lookup": "예매 조회",
+    "lookupDesc": "예매번호와 연락처를 입력하여 예매 내역을 확인하세요.",
+    "enterBookingNumber": "예매번호 입력",
+    "enterPhone": "연락처 입력",
+    "lookupButton": "조회하기",
+    "cancelBooking": "예매 취소",
+    "cancelConfirm": "정말 예매를 취소하시겠습니까? 취소 후 복구할 수 없습니다.",
+    "cancelSuccess": "예매가 취소되었습니다.",
+    "bookingNotFound": "예매 내역을 찾을 수 없습니다. 예매번호와 연락처를 확인해주세요.",
+    "status": {
+      "confirmed": "예매 확정",
+      "cancelled": "취소됨",
+      "pending": "결제 대기"
+    },
+    "showTitle": "공연명",
+    "bookingDate": "예매일",
+    "showDate": "공연일시",
+    "seats": "좌석",
+    "bookerName": "예매자",
+    "bookerPhone": "연락처",
+    "paymentAmount": "결제 금액"
+  },
+  "people": {
+    "actors": "배우",
+    "staff": "스텝",
+    "profile": "프로필",
+    "filmography": "출연 작품"
+  },
+  "rental": {
+    "title": "극장 대관",
+    "info": "시설 안내",
+    "pricing": "요금표",
+    "inquiry": "대관 문의",
+    "calendar": "일정 확인"
+  },
+  "notices": {
+    "title": "공지사항",
+    "pinned": "고정"
+  },
+  "support": {
+    "title": "후원하기",
+    "oneTime": "일시 후원",
+    "recurring": "정기 후원",
+    "donors": "후원자 명단",
+    "benefits": "후원 혜택",
+    "thankYou": "감사합니다"
+  },
+  "footer": {
+    "address": "주소",
+    "phone": "전화",
+    "email": "이메일",
+    "terms": "이용약관",
+    "privacy": "개인정보처리방침",
+    "copyright": "© {year} 나비아트홀. All rights reserved."
+  }
+}
