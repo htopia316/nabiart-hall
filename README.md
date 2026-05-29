@@ -1,36 +1,47 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 나비아트홀 (Nabiart Hall)
 
-## Getting Started
+나비아트홀 극단의 공식 홈페이지입니다. 공연 정보, 티켓 예매, 극장 대관, 후원 등 극단 운영에 필요한 기능을 제공하는 풀스택 웹 애플리케이션입니다.
 
-First, run the development server:
+## 주요 기능
+
+- **공연 정보**: 현재 상영 중인 공연 및 공연 이력 조회
+- **티켓 예매**: 좌석 선택부터 결제까지 원스톱 예매
+- **극장 대관**: 대관 안내 및 문의 접수
+- **후원**: 일시/정기 후원 및 후원자 명단 공개
+- **공지사항**: 극단 소식 및 공지
+- **관리자 페이지**: 공연/예매/프로필/공지 CRUD 관리
+- **다국어 지원**: 한국어, 영어, 중국어
+
+## 기술 스택
+
+- **프론트엔드**: Next.js (App Router), TypeScript, Tailwind CSS
+- **상태관리**: Zustand
+- **다국어**: next-intl
+- **백엔드/DB**: Supabase (Auth, Database, Storage)
+- **배포**: Vercel
+
+## 시작하기
+
+### 환경 변수 설정
+
+`.env.local.example`을 복사해 `.env.local`을 만들고 Supabase 정보를 입력하세요.
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+cp .env.local.example .env.local
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 개발 서버 실행
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm install
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+[http://localhost:3000](http://localhost:3000)에서 확인할 수 있습니다.
 
-## Learn More
+## 브랜치 전략
 
-To learn more about Next.js, take a look at the following resources:
+- `main`: 배포 브랜치
+- `feature/T-XXX-description`: 기능 개발 브랜치
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+커밋 메시지는 Conventional Commits 형식을 따릅니다. (`feat:`, `fix:`, `chore:` 등)
